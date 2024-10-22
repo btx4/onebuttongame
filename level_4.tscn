@@ -1,0 +1,322 @@
+[gd_scene load_steps=25 format=3 uid="uid://cj3mkouqtvqd2"]
+
+[ext_resource type="PackedScene" uid="uid://cmdrx8l6bmkld" path="res://actors/bubbles/bubbles.tscn" id="1_chuen"]
+[ext_resource type="Script" path="res://target.gd" id="1_pcnqb"]
+[ext_resource type="Script" path="res://ammoBar.gd" id="2_sbkuu"]
+[ext_resource type="Texture2D" uid="uid://ctyqwd6wndyus" path="res://actors/Ammo.png" id="3_hc2f0"]
+[ext_resource type="Script" path="res://actors/Level1/lineDrawer.gd" id="4_bnvjh"]
+[ext_resource type="Script" path="res://actors/Level1/path_follow_2d.gd" id="5_3nc6t"]
+[ext_resource type="Texture2D" uid="uid://c3hclidiybrun" path="res://actors/Level1/New Piskel (2).png" id="6_6kc46"]
+[ext_resource type="Script" path="res://actors/Level1/sprite_2d.gd" id="7_iuw1x"]
+[ext_resource type="Texture2D" uid="uid://klx7edblv00e" path="res://actors/Level1/Cannon Fire.png" id="8_i33hl"]
+[ext_resource type="Script" path="res://actors/Level1/Cannon.gd" id="9_iw0fv"]
+[ext_resource type="Script" path="res://area_2d.gd" id="10_fpbux"]
+[ext_resource type="PackedScene" uid="uid://bjvb4msvniix4" path="res://actors/enemyship/enemy_ship.tscn" id="11_1vuxw"]
+[ext_resource type="PackedScene" uid="uid://d3s67x8qni2k4" path="res://target.tscn" id="13_ivwxc"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4rch8"]
+
+[sub_resource type="Curve2D" id="Curve2D_x0i4m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -1.04406, 125.867, 1.04406, -125.867, -158.605, -179.537, 0, 0, 0, 0, 31.6427, -406.09, 59.9675, 131.676, -59.9675, -131.676, 198.979, -647.575, 12.4176, 173.766, -12.4176, -173.766, -99.1066, -925.706, 0, 0, 0, 0, 5.77283, -1104.01)
+}
+point_count = 6
+
+[sub_resource type="Animation" id="Animation_0km0w"]
+resource_name = "CannonFire"
+length = 1.08334
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0]
+}
+
+[sub_resource type="Animation" id="Animation_sbssf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqrls"]
+_data = {
+"CannonFire": SubResource("Animation_0km0w"),
+"RESET": SubResource("Animation_sbssf")
+}
+
+[sub_resource type="Animation" id="Animation_lsnbc"]
+resource_name = "CannonFire"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CannonL2:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(2, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_w4egv"]
+length = 0.001
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CannonL2:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w2g3a"]
+resource_name = "ShipAnimation"
+length = 2.00001
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfqrq"]
+_data = {
+"CannonFire": SubResource("Animation_lsnbc"),
+"RESET": SubResource("Animation_w4egv"),
+"ShipAnimation": SubResource("Animation_w2g3a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnufe"]
+size = Vector2(60.3868, 119.982)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teb7k"]
+size = Vector2(60.3868, 119.982)
+
+[node name="level_4" type="Node2D" groups=["level"]]
+script = ExtResource("1_pcnqb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.145098, 0.0588235, 0.368627, 1)
+position = Vector2(322.5, 517)
+scale = Vector2(717, 1092)
+texture = SubResource("CanvasTexture_4rch8")
+script = ExtResource("1_pcnqb")
+
+[node name="BubbleHOlder" type="Node2D" parent="."]
+position = Vector2(68, 88)
+
+[node name="Bubbles6" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(281, 623)
+rotation = 1.5708
+
+[node name="Bubbles" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(-3, 598)
+rotation = 1.5708
+
+[node name="Bubbles2" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(332, 905)
+rotation = -1.5708
+
+[node name="Bubbles3" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(324, 385)
+
+[node name="Bubbles4" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(-30, 79)
+
+[node name="Bubbles5" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(453, 64)
+rotation = -1.5708
+
+[node name="Bubbles7" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(158, 442)
+rotation = 1.5708
+
+[node name="Bubbles8" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(122, 747)
+rotation = -1.5708
+
+[node name="Bubbles9" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(485, 229)
+
+[node name="Bubbles10" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(2, 887)
+
+[node name="Bubbles11" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(137, 245)
+rotation = -1.5708
+
+[node name="Bubbles12" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(459, 545)
+
+[node name="Bubbles13" parent="BubbleHOlder" instance=ExtResource("1_chuen")]
+position = Vector2(512, 748)
+rotation = 1.5708
+
+[node name="ammoBar" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 922.0
+offset_right = 61.0
+offset_bottom = 962.0
+script = ExtResource("2_sbkuu")
+ammo_texture = ExtResource("3_hc2f0")
+metadata/_edit_use_anchors_ = true
+
+[node name="target" parent="." instance=ExtResource("13_ivwxc")]
+position = Vector2(86, 144)
+
+[node name="target2" parent="." instance=ExtResource("13_ivwxc")]
+position = Vector2(533, 871)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(320, 1009)
+rotation = 0.00289297
+scale = Vector2(1.00577, 1.00001)
+curve = SubResource("Curve2D_x0i4m")
+script = ExtResource("4_bnvjh")
+
+[node name="Line2D" type="Line2D" parent="Path2D"]
+width = 5.0
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = -2.29437
+loop = false
+script = ExtResource("5_3nc6t")
+
+[node name="Ship" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship"]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(7.4, 7.4)
+texture = ExtResource("6_6kc46")
+hframes = 3
+vframes = 3
+script = ExtResource("7_iuw1x")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(6.73317, -2.31875)
+scale = Vector2(0.71356, 0.71356)
+texture = ExtResource("8_i33hl")
+hframes = 4
+vframes = 4
+script = ExtResource("9_iw0fv")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="Tip" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(1.01392, 0.55189)
+
+[node name="toe" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(-5.97966, 0.473648)
+
+[node name="reloadTimer" type="Timer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+wait_time = 2.0
+one_shot = true
+
+[node name="CannonL2" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(-6.49136, -1.75955)
+rotation = 3.14159
+scale = Vector2(0.713559, 0.713559)
+texture = ExtResource("8_i33hl")
+hframes = 4
+vframes = 4
+script = ExtResource("9_iw0fv")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="Tip" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(1.01392, 0.55189)
+
+[node name="toe" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(-5.97966, 0.473648)
+
+[node name="reloadTimer" type="Timer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_pfqrq")
+}
+autoplay = "ShipAnimation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Ship"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_gnufe")
+
+[node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Ship" groups=["ship"]]
+rotation = 1.5708
+scale = Vector2(1, 1)
+script = ExtResource("10_fpbux")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Ship/Area2D"]
+shape = SubResource("RectangleShape2D_teb7k")
+
+[node name="EnemyShip" parent="." instance=ExtResource("11_1vuxw")]
+position = Vector2(736, 721)
+
+[node name="EnemyShip2" parent="." instance=ExtResource("11_1vuxw")]
+position = Vector2(-133, 350)
+rotation = -3.14159
+
+[connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2" method="_on_reload_timer_timeout"]
+
+[editable path="BubbleHOlder/Bubbles6"]
+[editable path="EnemyShip"]
+[editable path="EnemyShip2"]
