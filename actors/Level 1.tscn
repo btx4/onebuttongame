@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://32ho1v8m7f6p"]
+[gd_scene load_steps=28 format=3 uid="uid://32ho1v8m7f6p"]
 
-[ext_resource type="Script" path="res://actors/level_1.gd" id="1_s5w83"]
+[ext_resource type="Script" path="res://level_1.gd" id="1_s5w83"]
 [ext_resource type="Script" path="res://actors/Level1/lineDrawer.gd" id="1_ysd65"]
 [ext_resource type="Script" path="res://actors/Level1/path_follow_2d.gd" id="2_icm01"]
 [ext_resource type="Texture2D" uid="uid://c3hclidiybrun" path="res://actors/Level1/New Piskel (2).png" id="3_ahcp6"]
@@ -11,14 +11,54 @@
 [ext_resource type="PackedScene" uid="uid://d3s67x8qni2k4" path="res://target.tscn" id="8_gxwk0"]
 [ext_resource type="Script" path="res://ammoBar.gd" id="9_k0ar7"]
 [ext_resource type="Texture2D" uid="uid://ctyqwd6wndyus" path="res://actors/Ammo.png" id="10_pulkp"]
+[ext_resource type="Texture2D" uid="uid://cllc7t2jqyhl4" path="res://explosion.png" id="12_m68su"]
+[ext_resource type="AudioStream" uid="uid://lid70o4neetg" path="res://523089__magnuswaker__explosion-1.wav" id="13_54kbq"]
+[ext_resource type="AudioStream" uid="uid://dc7f8xbsv8okr" path="res://480855__craigsmith__r29-23-rhythmic-movement-of-water.wav" id="14_jbnb4"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ly8ce"]
 
 [sub_resource type="Curve2D" id="Curve2D_am31v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0.930969, -22.0027, 0, 0, 0, 0, -2.19376, -1453.99)
+"points": PackedVector2Array(0, 0, 0, 0, 0.930969, -22.0027, 1.85224, 95.2381, -1.85224, -95.2381, -33.6217, -281.901, -1.07147, 176.204, 1.07147, -176.204, 36.7741, -696.103, 0, 0, 0, 0, -2.30493, -1146.99)
 }
-point_count = 2
+point_count = 4
+
+[sub_resource type="Animation" id="Animation_wyehk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_8ovwt"]
+resource_name = "explosion"
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khp2i"]
+_data = {
+"RESET": SubResource("Animation_wyehk"),
+"explosion": SubResource("Animation_8ovwt")
+}
 
 [sub_resource type="Animation" id="Animation_0km0w"]
 resource_name = "CannonFire"
@@ -217,7 +257,7 @@ width = 5.0
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(0.930969, -22.0027)
-rotation = -1.57298
+rotation = -1.70297
 loop = false
 script = ExtResource("2_icm01")
 
@@ -241,6 +281,19 @@ hframes = 4
 vframes = 4
 script = ExtResource("6_0fpuu")
 
+[node name="Explosion" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(5.90121, 0.659821)
+rotation = 1.59764
+texture = ExtResource("12_m68su")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Explosion" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D/Explosion"]
+libraries = {
+"": SubResource("AnimationLibrary_khp2i")
+}
+
 [node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_xqrls")
@@ -256,6 +309,9 @@ position = Vector2(-5.97966, 0.473648)
 wait_time = 2.0
 one_shot = true
 
+[node name="explosion" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+stream = ExtResource("13_54kbq")
+
 [node name="CannonL2" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
 texture_filter = 1
 position = Vector2(-6.49136, -1.75955)
@@ -265,6 +321,19 @@ texture = ExtResource("5_q2nvb")
 hframes = 4
 vframes = 4
 script = ExtResource("6_0fpuu")
+
+[node name="Explosion" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(5.9012, 0.659821)
+rotation = 1.59764
+texture = ExtResource("12_m68su")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Explosion" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2/Explosion"]
+libraries = {
+"": SubResource("AnimationLibrary_khp2i")
+}
 
 [node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
 libraries = {
@@ -281,6 +350,9 @@ position = Vector2(-5.97966, 0.473648)
 wait_time = 2.0
 one_shot = true
 
+[node name="explosion" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+stream = ExtResource("13_54kbq")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship"]
 root_node = NodePath("../Sprite2D")
 libraries = {
@@ -291,6 +363,9 @@ autoplay = "ShipAnimation"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Ship"]
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_oq3kg")
+
+[node name="WaterSplash" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D"]
+stream = ExtResource("14_jbnb4")
 
 [connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2" method="_on_reload_timer_timeout"]

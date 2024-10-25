@@ -1,0 +1,193 @@
+[gd_scene load_steps=7 format=3 uid="uid://djl21sebqmeyn"]
+
+[ext_resource type="Script" path="res://level_0.gd" id="1_7wh4s"]
+[ext_resource type="PackedScene" uid="uid://cmdrx8l6bmkld" path="res://actors/bubbles/bubbles.tscn" id="1_bfsvo"]
+[ext_resource type="PackedScene" uid="uid://bjvb4msvniix4" path="res://actors/enemyship/enemy_ship.tscn" id="2_l3oo6"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fwgac"]
+
+[sub_resource type="Curve2D" id="Curve2D_5kfij"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1044.03, 366.138)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_5u0xq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1336.05, 496.466)
+}
+point_count = 3
+
+[node name="Level_0" type="Node2D"]
+script = ExtResource("1_7wh4s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.145098, 0.0588235, 0.368627, 1)
+position = Vector2(322.5, 517)
+scale = Vector2(717, 1092)
+texture = SubResource("CanvasTexture_fwgac")
+
+[node name="BubbleHOlder" type="Node2D" parent="."]
+position = Vector2(68, 88)
+
+[node name="Bubbles6" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(281, 623)
+rotation = 1.5708
+
+[node name="Bubbles" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(-3, 598)
+rotation = 1.5708
+
+[node name="Bubbles2" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(332, 905)
+rotation = -1.5708
+
+[node name="Bubbles3" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(324, 385)
+
+[node name="Bubbles4" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(-30, 79)
+
+[node name="Bubbles5" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(453, 64)
+rotation = -1.5708
+
+[node name="Bubbles7" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(158, 442)
+rotation = 1.5708
+
+[node name="Bubbles8" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(122, 747)
+rotation = -1.5708
+
+[node name="Bubbles9" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(485, 229)
+
+[node name="Bubbles10" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(2, 887)
+
+[node name="Bubbles11" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(137, 245)
+rotation = -1.5708
+
+[node name="Bubbles12" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(459, 545)
+
+[node name="Bubbles13" parent="BubbleHOlder" instance=ExtResource("1_bfsvo")]
+position = Vector2(512, 748)
+rotation = 1.5708
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-124, 639)
+rotation = 0.576608
+curve = SubResource("Curve2D_5kfij")
+
+[node name="PathFollow2D" parent="Path2D" instance=ExtResource("2_l3oo6")]
+position = Vector2(-0.187185, -0.0656452)
+rotation = 0.0
+
+[node name="Path2D2" type="Path2D" parent="."]
+position = Vector2(793, 158)
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D2" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D3" type="Path2D" parent="."]
+position = Vector2(835, 607)
+rotation = 0.760611
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D" type="Path2D" parent="Path2D3"]
+position = Vector2(-973.182, 367.023)
+rotation = -0.486588
+curve = SubResource("Curve2D_5kfij")
+
+[node name="PathFollow2D" parent="Path2D3/Path2D" instance=ExtResource("2_l3oo6")]
+position = Vector2(-0.187185, -0.0656452)
+rotation = 0.0
+
+[node name="Path2D2" type="Path2D" parent="Path2D3"]
+position = Vector2(51.5875, -183.402)
+rotation = -1.0632
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D2" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D3" type="Path2D" parent="Path2D3"]
+position = Vector2(93.5875, 265.598)
+rotation = -0.302585
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D3" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D4" type="Path2D" parent="Path2D3"]
+position = Vector2(-165.528, -701.533)
+rotation = -0.674596
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D4" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D5" type="Path2D" parent="Path2D3"]
+position = Vector2(-123.528, -252.533)
+rotation = 0.0860156
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D5" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D" type="Path2D" parent="Path2D3/Path2D5"]
+position = Vector2(-973.182, 367.023)
+rotation = -0.486588
+curve = SubResource("Curve2D_5kfij")
+
+[node name="PathFollow2D" parent="Path2D3/Path2D5/Path2D" instance=ExtResource("2_l3oo6")]
+position = Vector2(-0.187185, -0.0656452)
+rotation = 0.0
+
+[node name="Path2D2" type="Path2D" parent="Path2D3/Path2D5"]
+position = Vector2(51.5875, -183.402)
+rotation = -1.0632
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D5/Path2D2" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="Path2D3" type="Path2D" parent="Path2D3/Path2D5"]
+position = Vector2(93.5875, 265.598)
+rotation = -0.302585
+curve = SubResource("Curve2D_5u0xq")
+
+[node name="PathFollow2D4" parent="Path2D3/Path2D5/Path2D3" instance=ExtResource("2_l3oo6")]
+position = Vector2(0.239541, -0.0890118)
+rotation = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 23.0
+offset_top = 452.0
+offset_right = 926.0
+offset_bottom = 612.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 60
+text = "Press Space to Start!
+"
+
+[editable path="BubbleHOlder/Bubbles6"]

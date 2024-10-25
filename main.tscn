@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cu0p7r3odvm2p"]
+[gd_scene load_steps=24 format=3 uid="uid://cu0p7r3odvm2p"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_l1tkx"]
 [ext_resource type="PackedScene" uid="uid://cmdrx8l6bmkld" path="res://actors/bubbles/bubbles.tscn" id="2_17qk4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://actors/Level1/sprite_2d.gd" id="9_ugd12"]
 [ext_resource type="Texture2D" uid="uid://klx7edblv00e" path="res://actors/Level1/Cannon Fire.png" id="10_aspc5"]
 [ext_resource type="Script" path="res://actors/Level1/Cannon.gd" id="11_nln3n"]
+[ext_resource type="Script" path="res://area_2d.gd" id="12_hgg20"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4x8pq"]
 
@@ -127,10 +128,13 @@ _data = {
 "ShipAnimation": SubResource("Animation_w2g3a")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1n8m"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3j33"]
 size = Vector2(88, 136)
 
-[node name="Main" type="Node2D" groups=["level"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2txyw"]
+size = Vector2(88, 136)
+
+[node name="Level_5" type="Node2D" groups=["level"]]
 position = Vector2(66, 59)
 script = ExtResource("1_l1tkx")
 
@@ -256,7 +260,7 @@ position = Vector2(1.01392, 0.55189)
 position = Vector2(-5.97966, 0.473648)
 
 [node name="reloadTimer" type="Timer" parent="PathForLevel/PathFollow2D/Ship/Sprite2D/Sprite2D"]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
 
 [node name="CannonL2" type="Sprite2D" parent="PathForLevel/PathFollow2D/Ship/Sprite2D"]
@@ -281,7 +285,7 @@ position = Vector2(1.01392, 0.55189)
 position = Vector2(-5.97966, 0.473648)
 
 [node name="reloadTimer" type="Timer" parent="PathForLevel/PathFollow2D/Ship/Sprite2D/CannonL2"]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PathForLevel/PathFollow2D/Ship"]
@@ -293,7 +297,14 @@ autoplay = "ShipAnimation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathForLevel/PathFollow2D/Ship"]
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_e1n8m")
+shape = SubResource("RectangleShape2D_g3j33")
+
+[node name="Area2D" type="Area2D" parent="PathForLevel/PathFollow2D/Ship" groups=["ship"]]
+rotation = 1.5708
+script = ExtResource("12_hgg20")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathForLevel/PathFollow2D/Ship/Area2D"]
+shape = SubResource("RectangleShape2D_2txyw")
 
 [connection signal="timeout" from="PathForLevel/PathFollow2D/Ship/Sprite2D/Sprite2D/reloadTimer" to="PathForLevel/PathFollow2D/Ship/Sprite2D/Sprite2D" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="PathForLevel/PathFollow2D/Ship/Sprite2D/CannonL2/reloadTimer" to="PathForLevel/PathFollow2D/Ship/Sprite2D/CannonL2" method="_on_reload_timer_timeout"]

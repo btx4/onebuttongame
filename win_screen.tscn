@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://clqlsylwn3cu1"]
+
+[ext_resource type="Script" path="res://actors/Level1/lineDrawer.gd" id="1_sjo27"]
+[ext_resource type="Script" path="res://WINSCREEN_PATH.gd" id="2_vi400"]
+[ext_resource type="Texture2D" uid="uid://c3hclidiybrun" path="res://actors/Level1/New Piskel (2).png" id="3_fj2yw"]
+[ext_resource type="Script" path="res://actors/Level1/sprite_2d.gd" id="4_kkeq5"]
+[ext_resource type="Texture2D" uid="uid://klx7edblv00e" path="res://actors/Level1/Cannon Fire.png" id="5_eucio"]
+[ext_resource type="Script" path="res://actors/Level1/Cannon.gd" id="6_yi70a"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_sn4oa"]
+
+[sub_resource type="Curve2D" id="Curve2D_6gvdg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -500)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_0km0w"]
+resource_name = "CannonFire"
+length = 1.08334
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0]
+}
+
+[sub_resource type="Animation" id="Animation_sbssf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqrls"]
+_data = {
+"CannonFire": SubResource("Animation_0km0w"),
+"RESET": SubResource("Animation_sbssf")
+}
+
+[node name="Win Screen" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.145098, 0.0588235, 0.368627, 1)
+position = Vector2(322.5, 517)
+scale = Vector2(717, 1092)
+texture = SubResource("CanvasTexture_sn4oa")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(320, 1081)
+rotation = 0.00289297
+scale = Vector2(1.00577, 1.00001)
+curve = SubResource("Curve2D_6gvdg")
+script = ExtResource("1_sjo27")
+
+[node name="Line2D" type="Line2D" parent="Path2D"]
+width = 5.0
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = -1.5708
+loop = false
+script = ExtResource("2_vi400")
+
+[node name="Ship" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship"]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(7.4, 7.4)
+texture = ExtResource("3_fj2yw")
+hframes = 3
+vframes = 3
+script = ExtResource("4_kkeq5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(6.73317, -2.31875)
+scale = Vector2(0.71356, 0.71356)
+texture = ExtResource("5_eucio")
+hframes = 4
+vframes = 4
+script = ExtResource("6_yi70a")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="CannonL2" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(-6.49136, -1.75955)
+rotation = 3.14159
+scale = Vector2(0.713559, 0.713559)
+texture = ExtResource("5_eucio")
+hframes = 4
+vframes = 4
+script = ExtResource("6_yi70a")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="TextEdit" type="TextEdit" parent="Path2D/PathFollow2D"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Special thanks to magnuswaker, owlstorm, craigsmith, ZZZ, and --- for their sounds from freesound.org"

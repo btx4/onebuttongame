@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://72yc0pegfi3g"]
+
+[ext_resource type="Script" path="res://actors/enemyship/enemyship.gd" id="1_tiwey"]
+[ext_resource type="PackedScene" uid="uid://d3s67x8qni2k4" path="res://target.tscn" id="2_wyn0o"]
+
+[node name="moving_target" type="PathFollow2D"]
+rotation = 3.14159
+loop = false
+script = ExtResource("1_tiwey")
+
+[node name="target" parent="." instance=ExtResource("2_wyn0o")]
+position = Vector2(0, 0)
+scale = Vector2(2.36, 2.36)

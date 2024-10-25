@@ -48,3 +48,4 @@ func game_is_over() :
 		get_tree().reload_current_scene()
 	else:
 		print("You Win")
+		get_tree().change_scene_to_file("res://level_4.tscn")  # Replace with your scene path

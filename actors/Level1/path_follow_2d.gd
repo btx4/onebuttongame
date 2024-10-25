@@ -5,9 +5,8 @@ var moving = false;
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
+		$WaterSplash.play()
 		moving = true
-		$Ship/Sprite2D/Sprite2D.canFire = true
-		$Ship/Sprite2D/CannonL2.canFire = true
 		
 	if moving == true:
 		progress += speed * delta  # Move along the path

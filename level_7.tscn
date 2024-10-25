@@ -1,0 +1,400 @@
+[gd_scene load_steps=31 format=3 uid="uid://1d8knvlleg3m"]
+
+[ext_resource type="Script" path="res://level_7.gd" id="1_52d01"]
+[ext_resource type="PackedScene" uid="uid://cmdrx8l6bmkld" path="res://actors/bubbles/bubbles.tscn" id="1_dyfae"]
+[ext_resource type="Script" path="res://ammoBar.gd" id="2_abmtk"]
+[ext_resource type="Texture2D" uid="uid://ctyqwd6wndyus" path="res://actors/Ammo.png" id="3_nkabn"]
+[ext_resource type="Script" path="res://actors/Level1/lineDrawer.gd" id="4_umv3l"]
+[ext_resource type="Script" path="res://actors/Level1/path_follow_2d.gd" id="5_7qrvw"]
+[ext_resource type="Texture2D" uid="uid://c3hclidiybrun" path="res://actors/Level1/New Piskel (2).png" id="6_caktq"]
+[ext_resource type="Script" path="res://actors/Level1/sprite_2d.gd" id="7_p66yy"]
+[ext_resource type="Texture2D" uid="uid://klx7edblv00e" path="res://actors/Level1/Cannon Fire.png" id="8_5a7wm"]
+[ext_resource type="Script" path="res://actors/Level1/Cannon.gd" id="9_tvjug"]
+[ext_resource type="Texture2D" uid="uid://cllc7t2jqyhl4" path="res://explosion.png" id="10_24ibk"]
+[ext_resource type="AudioStream" uid="uid://lid70o4neetg" path="res://523089__magnuswaker__explosion-1.wav" id="11_warnv"]
+[ext_resource type="Script" path="res://area_2d.gd" id="13_oxrvh"]
+[ext_resource type="AudioStream" uid="uid://dc7f8xbsv8okr" path="res://480855__craigsmith__r29-23-rhythmic-movement-of-water.wav" id="14_2rhls"]
+[ext_resource type="PackedScene" uid="uid://72yc0pegfi3g" path="res://moving_target.tscn" id="14_b1qkt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uxxu5"]
+
+[sub_resource type="Curve2D" id="Curve2D_77eig"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -1.64335, 120.004, 1.64335, -120.004, -160.996, -319.53, 10.3625, 145.969, -10.3625, -145.969, 110.654, -590.319, -5.55711, 142.015, 5.55711, -142.015, -89.118, -909.735, 0, 0, 0, 0, 35.6696, -1080.1)
+}
+point_count = 5
+
+[sub_resource type="Animation" id="Animation_0km0w"]
+resource_name = "CannonFire"
+length = 1.08334
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0]
+}
+
+[sub_resource type="Animation" id="Animation_sbssf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqrls"]
+_data = {
+"CannonFire": SubResource("Animation_0km0w"),
+"RESET": SubResource("Animation_sbssf")
+}
+
+[sub_resource type="Animation" id="Animation_wyehk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_8ovwt"]
+resource_name = "explosion"
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khp2i"]
+_data = {
+"RESET": SubResource("Animation_wyehk"),
+"explosion": SubResource("Animation_8ovwt")
+}
+
+[sub_resource type="Animation" id="Animation_lsnbc"]
+resource_name = "CannonFire"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CannonL2:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(2, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_w4egv"]
+length = 0.001
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CannonL2:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w2g3a"]
+resource_name = "ShipAnimation"
+length = 2.00001
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfqrq"]
+_data = {
+"CannonFire": SubResource("Animation_lsnbc"),
+"RESET": SubResource("Animation_w4egv"),
+"ShipAnimation": SubResource("Animation_w2g3a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5xgn"]
+size = Vector2(60.3868, 119.982)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axvlu"]
+size = Vector2(60.3868, 119.982)
+
+[sub_resource type="Curve2D" id="Curve2D_2wkht"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 600)
+}
+point_count = 2
+
+[node name="level_7" type="Node2D" groups=["level"]]
+script = ExtResource("1_52d01")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.145098, 0.0588235, 0.368627, 1)
+position = Vector2(322.5, 517)
+scale = Vector2(717, 1092)
+texture = SubResource("CanvasTexture_uxxu5")
+
+[node name="BubbleHOlder" type="Node2D" parent="."]
+position = Vector2(68, 88)
+
+[node name="Bubbles6" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(281, 623)
+rotation = 1.5708
+
+[node name="Bubbles" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(-3, 598)
+rotation = 1.5708
+
+[node name="Bubbles2" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(332, 905)
+rotation = -1.5708
+
+[node name="Bubbles3" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(324, 385)
+
+[node name="Bubbles4" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(-30, 79)
+
+[node name="Bubbles5" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(453, 64)
+rotation = -1.5708
+
+[node name="Bubbles7" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(158, 442)
+rotation = 1.5708
+
+[node name="Bubbles8" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(122, 747)
+rotation = -1.5708
+
+[node name="Bubbles9" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(485, 229)
+
+[node name="Bubbles10" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(2, 887)
+
+[node name="Bubbles11" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(137, 245)
+rotation = -1.5708
+
+[node name="Bubbles12" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(459, 545)
+
+[node name="Bubbles13" parent="BubbleHOlder" instance=ExtResource("1_dyfae")]
+position = Vector2(512, 748)
+rotation = 1.5708
+
+[node name="ammoBar" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 922.0
+offset_right = 61.0
+offset_bottom = 962.0
+script = ExtResource("2_abmtk")
+ammo_texture = ExtResource("3_nkabn")
+metadata/_edit_use_anchors_ = true
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(320, 1009)
+rotation = 0.00289297
+scale = Vector2(1.00577, 1.00001)
+curve = SubResource("Curve2D_77eig")
+script = ExtResource("4_umv3l")
+
+[node name="Line2D" type="Line2D" parent="Path2D"]
+width = 5.0
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = -2.03752
+loop = false
+script = ExtResource("5_7qrvw")
+
+[node name="Ship" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship"]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(7.4, 7.4)
+texture = ExtResource("6_caktq")
+hframes = 3
+vframes = 3
+script = ExtResource("7_p66yy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(6.73317, -2.31875)
+scale = Vector2(0.71356, 0.71356)
+texture = ExtResource("8_5a7wm")
+hframes = 4
+vframes = 4
+script = ExtResource("9_tvjug")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="Tip" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(1.01392, 0.55189)
+
+[node name="toe" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(-5.97966, 0.473648)
+
+[node name="reloadTimer" type="Timer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Explosion" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+position = Vector2(5.90121, 0.659821)
+rotation = 1.59764
+texture = ExtResource("10_24ibk")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Explosion" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D/Explosion"]
+libraries = {
+"": SubResource("AnimationLibrary_khp2i")
+}
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D"]
+stream = ExtResource("11_warnv")
+
+[node name="CannonL2" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D"]
+texture_filter = 1
+position = Vector2(-6.49136, -1.75955)
+rotation = 3.14159
+scale = Vector2(0.713559, 0.713559)
+texture = ExtResource("8_5a7wm")
+hframes = 4
+vframes = 4
+script = ExtResource("9_tvjug")
+
+[node name="CannonLAnimation" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+libraries = {
+"": SubResource("AnimationLibrary_xqrls")
+}
+
+[node name="Tip" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(1.01392, 0.55189)
+
+[node name="toe" type="Node2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(-5.97966, 0.473648)
+
+[node name="reloadTimer" type="Timer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Explosion" type="Sprite2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+position = Vector2(5.90121, 0.659821)
+rotation = 1.59764
+texture = ExtResource("10_24ibk")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Explosion" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2/Explosion"]
+libraries = {
+"": SubResource("AnimationLibrary_khp2i")
+}
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2"]
+stream = ExtResource("11_warnv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D/Ship"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_pfqrq")
+}
+autoplay = "ShipAnimation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Ship"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_y5xgn")
+
+[node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Ship" groups=["ship"]]
+rotation = 1.5708
+script = ExtResource("13_oxrvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Ship/Area2D"]
+shape = SubResource("RectangleShape2D_axvlu")
+
+[node name="WaterSplash" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D"]
+stream = ExtResource("14_2rhls")
+
+[node name="tp1" type="Path2D" parent="."]
+position = Vector2(566, 919)
+rotation = -3.14159
+curve = SubResource("Curve2D_2wkht")
+
+[node name="moving_target" parent="tp1" instance=ExtResource("14_b1qkt")]
+rotation = 1.5708
+
+[node name="tp2" type="Path2D" parent="."]
+position = Vector2(64, 56)
+curve = SubResource("Curve2D_2wkht")
+
+[node name="moving_target" parent="tp2" instance=ExtResource("14_b1qkt")]
+rotation = 1.5708
+
+[connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/Sprite2D" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2/reloadTimer" to="Path2D/PathFollow2D/Ship/Sprite2D/CannonL2" method="_on_reload_timer_timeout"]
+
+[editable path="BubbleHOlder/Bubbles6"]
